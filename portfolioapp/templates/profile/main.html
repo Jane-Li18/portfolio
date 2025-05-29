@@ -1,0 +1,304 @@
+{% load static %}
+{% load korean_lorem %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>{% block title %}JaneLi | 셰인 리{% endblock title %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link rel="icon" href="{% static 'prizes/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'prizes/favicon.png' %}" type="image/png">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('/static/fonts/ProductSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow-y: auto; /* Enable scrolling on the body */
+            overflow-x: hidden; 
+        }
+        
+        body {
+            font-family: 'Google Sans';
+            background-color: var(--bg-primary);
+            color: var(--txt-primary);
+            touch-action: manipulation;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Ensure the container grows to fill the available space */
+        .container-xxl {
+            flex: 1;
+        }
+        
+        /* Other existing styles... */
+        .non-clickable {
+            pointer-events: none;
+            cursor: default;
+            color: gray;
+        }
+        
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('/static/Google Sans Flex/ProductSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --bg-primary: #f0f0f0;
+            --txt-primary: #000;
+            --navbar-bg: rgba(255, 255, 255, 0.5);
+            --navbar-txt: #333; 
+            --footer-bg: rgba(255, 255, 255, 0.5);
+            --footer-txt: white;
+            --glass-blur: 10px;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #333;
+            --txt-primary: #fff;
+            --navbar-bg: rgba(34, 34, 34, 0.5); 
+            --navbar-txt: #ddd;
+            --footer-bg: rgba(34, 34, 34, 0.5); 
+            --footer-txt: #ddd;
+        }
+
+        /* Apply blur and border to navbar and footer */
+        header.navbar, .footer {
+            background-color: var(--navbar-bg); /* or var(--footer-bg) for footer */
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur)); /* Safari support */
+            border: var(--glass-border);
+            /* Optional: smooth transition */
+            transition: background-color 0.3s ease;
+        }
+
+
+        ul, li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .form-control:focus {
+            border-color: var(--navbar-bg);
+            box-shadow: var(--navbar-bg);
+        }
+        
+        .btn {
+            border: 1px solid var(--navbar-txt);
+            color: var(--navbar-txt);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            background-color: var(--navbar-bg);
+        }
+        
+        .btn:hover {
+            background-color: var(--navbar-txt);
+            color: var(--navbar-bg);
+        }
+        
+        .body-sidebar {
+            grid-area: sidebar;
+        }
+        
+        .bi {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.125em;
+            fill: currentcolor;
+        }
+        
+        .body-links-link {
+            padding: 0.1875rem 0.5rem;
+            margin-top: 0.125rem;
+            margin-left: 1.125rem;
+            color: var(--txt-primary);
+            text-decoration: none;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-txt);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        @media (min-width: 992px) {
+            .bd-layout {
+                display: grid;
+                grid-template-areas: "sidebar main";
+                grid-template-columns: 1fr 5fr;
+                gap: 1.5rem;
+            }
+        
+            .body-sidebar {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 5rem;
+                display: block !important;
+                height: calc(100vh - 6rem);
+                padding-left: 0.25rem;
+                margin-left: -0.25rem;
+                overflow-y: auto;
+            }
+        }
+        
+        a {
+            color: var(--txt-primary);
+            text-decoration: none;
+        }
+        
+        span {
+            font-size: 1rem;
+        }
+        
+        button {
+            border: 1px solid var(--txt-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Minimal scrollbar for the body */
+        body::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+        
+        body::-webkit-scrollbar-track {
+            background: transparent; /* Transparent track */
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent thumb */
+            border-radius: 4px; /* Rounded corners */
+        }
+        
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.5); /* Darker thumb on hover */
+        }
+        
+        /* Optional: Minimal scrollbar for other scrollable elements */
+        .container-xxl::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .container-xxl::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .container-xxl::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+        
+        .container-xxl::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .compact-centered-text {
+            display: block;
+            max-width: 1300px;
+            {% comment %} margin: 3rem auto 1.5rem;
+            padding: 0.5rem 1rem; {% endcomment %}
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="compact-centered-text">
+        {% include "profile/profile.html" %}
+    </div>
+        {% include "profile/header.html" %}
+    <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+        {% include "profile/sidebar.html" %}
+        <main class="body-main order-1">
+            <div class="bd-intro">
+                {% block content %}
+                    <span>{% lorem 20 b random %}</span>
+                {% endblock content %}
+            </div>
+        </main>
+    </div>
+    {% include "profile/footer.html" %}
+</body>
+
+<!-- jQuery and Bootstrap Bundle JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const logo = document.getElementById('theme-logo');
+    const brandText = document.querySelector('.navbar-brand span');
+
+    // Function to update the logo with smooth transition
+    function updateLogo(theme) {
+        // Add fade-out class to both elements
+        logo.classList.add('fade-out');
+        brandText.classList.add('fade-out');
+        
+        // Wait for fade-out to complete before changing sources
+        setTimeout(() => {
+            if (theme === 'dark') {
+                logo.src = "{% static 'assets/logo_white.png' %}";
+                themeToggle.innerHTML = '<i class="ri-sun-line"></i>';
+            } else {
+                logo.src = "{% static 'assets/logo_black.png' %}";
+                themeToggle.innerHTML = '<i class="ri-moon-line"></i>';
+            }
+            
+            // Remove fade-out class after changing sources
+            setTimeout(() => {
+                logo.classList.remove('fade-out');
+                brandText.classList.remove('fade-out');
+            }, 50); // Small delay to ensure new image is loaded
+        }, 250); // Matches the 0.5s transition time
+    }
+
+    // Check localStorage for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+        updateLogo(savedTheme);
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateLogo(newTheme);
+    });
+</script>
+
+
+
+</html>

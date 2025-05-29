@@ -1,0 +1,276 @@
+<style>
+  /* ===== Sidebar Core Styles ===== */
+  .sidebar {
+    --sidebar-transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --text-delay: 0s;
+    --icon-delay: 0.15s;
+    --item-delay-step: 0.1s;
+  }
+  
+  .sidebar .sub-navbar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+  
+  .sidebar .sub-navbar-item,
+  .sidebar .sub-navbar-item ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 0.9375rem; /* 10px 15px */
+    text-decoration: none;
+    transition: var(--sidebar-transition);
+    overflow: hidden;
+  }
+  
+  .sidebar .sub-navbar-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 0.9375rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+  
+  .sidebar .sub-navbar-item:hover {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-txt);
+  }
+  
+  /* Initial hidden state */
+  .sidebar .sub-navbar-item span {
+    flex-grow: 1;
+    text-align: left;
+    transform: translateX(-20px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+  
+  .sidebar .sub-navbar-item i {
+    margin-left: 0.625rem; /* 10px */
+    transform: translateX(20px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  /* Animated state */
+  .sidebar[data-animate="true"] .sub-navbar-item span {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: var(--text-delay);
+  }
+
+  .sidebar[data-animate="true"] .sub-navbar-item i {
+    transform: translateX(0);
+    opacity: 1;
+    transition-delay: var(--icon-delay);
+  }
+
+  /* ===== Nested List Styles ===== */
+  .sidebar .sub-navbar-item ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.625rem; /* 10px */
+  }
+  
+  .sidebar .sub-navbar-item ul li {
+    padding: 0.3125rem 0; /* 5px */
+    border-bottom: 1px solid var(--border-color, #ddd);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .sidebar[data-animate="true"] .sub-navbar-item ul li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .sidebar .sub-navbar-item ul li:last-child {
+    border-bottom: none;
+  }
+  
+  /* ===== Offcanvas Structure ===== */
+  .sidebar .offcanvas-header {
+    background-color: var(--navbar-bg);
+    color: var(--txt-primary);
+    transition: var(--sidebar-transition);
+  }
+  
+  .sidebar .offcanvas-body {
+    background-color: var(--bg-primary);
+    color: var(--txt-primary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: var(--sidebar-transition);
+  }
+  
+  /* ===== Theme Toggle ===== */
+  .sidebar .theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.625rem;
+    border-top: 1px solid var(--txt-primary);
+    margin-top: auto;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--sidebar-transition);
+  }
+  
+  .sidebar[data-animate="true"] .theme-toggle-container {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--item-delay-step) * 4 + 0.15s);
+  }
+  
+  .sidebar #theme-toggle {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-txt);
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--sidebar-transition);
+  }
+  
+  .sidebar #theme-toggle:hover {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-txt);
+    transform: scale(1.05);
+  }
+  
+  .sidebar .btn-close {
+    opacity: 1;
+    transition: var(--sidebar-transition);
+  }
+
+  /* Light mode */
+  body:not([data-theme="dark"]) .sidebar .btn-close {
+    filter: none;
+    color: var(--txt-primary);
+  }
+
+  /* Dark mode */
+  body[data-theme="dark"] .sidebar .btn-close {
+    filter: invert(1);
+    color: var(--txt-primary);
+  }
+
+  
+  /* ===== Leaderboards ===== */
+  .sidebar .leaderboards-container {
+    background-color: var(--navbar-txt);
+    color: var(--navbar-bg);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--sidebar-transition);
+  }
+  
+  .sidebar[data-animate="true"] .leaderboards-container {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--item-delay-step) * 4 + 0.2s);
+  }
+  
+  .sidebar .leaderboards-container ul,
+  .sidebar .leaderboards-container li {
+    transition: var(--sidebar-transition);
+  }
+</style>
+
+
+<aside class="body-sidebar sidebar">
+  <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar" aria-labelledby="bdSidebarOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="bdSidebarOffcanvasLabel"></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebar"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <nav class="body-links w-100" id="bd-docs-nav" aria-label="Docs navigation">
+        <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+          <li class="bd-links-group py-2">
+            <ul class="list-unstyled fw-normal pb-2 small">
+              <li>
+                <a href="{% url 'main' %}" class="sub-navbar-item body-link rounded">
+                  <span>Home</span>
+                  <i class="fas fa-gamepad"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sub-navbar-item body-link rounded">
+                  <span>Projects</span>
+                  <i class="fas fa-gift"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'feedback' %}" class="sub-navbar-item body-link rounded">
+                  <span>Feedback</span>
+                  <i class="fa-solid fa-paperclip"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sub-navbar-item body-link rounded">
+                  <span>About</span>
+                  <i class="ri-number-8"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Dark mode toggle button at the bottom -->
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="btn" aria-label="Toggle theme">
+          <i class="ri-moon-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  function triggerSidebarAnimation() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    sidebar.setAttribute('data-animate', 'false');
+    // Force reflow
+    void sidebar.offsetWidth;
+    sidebar.setAttribute('data-animate', 'true');
+  }
+
+  function initializeSidebarAnimation() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Calculate delays for menu items
+    const menuItems = document.querySelectorAll('.sub-navbar-item');
+    menuItems.forEach((item, index) => {
+      const baseDelay = index * 0.1;
+      item.style.setProperty('--text-delay', `${baseDelay}s`);
+      item.style.setProperty('--icon-delay', `${baseDelay + 0.15}s`);
+    });
+
+    // Trigger animation on page load if theme is set
+    const currentTheme = document.body.getAttribute('data-theme');
+    if (currentTheme) {
+      triggerSidebarAnimation();
+    }
+
+    // Listen for theme toggle event from main.html
+    document.addEventListener('themeToggled', () => {
+      triggerSidebarAnimation();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeSidebarAnimation);
+</script>

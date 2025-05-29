@@ -1,0 +1,116 @@
+{% load static %}
+
+<header class="navbar navbar-expand-lg body-navbar navbar-dark sticky-top">
+    <nav class="container-xxl body-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
+        <a class="navbar-brand" href="{% url 'main' %}">
+            <!-- Replace the icon with your logo -->
+            <img 
+                src="{% static 'assets/logo_white.png' %}" 
+                alt="JaneLi Logo" 
+                class="navbar-logo"
+                id="theme-logo"
+            >
+            <span>by 셰인 리</span>
+        </a>
+        <div class="body-navbar-toggle">
+            <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdSidebar" aria-controls="bdSidebar" aria-label="Toggle docs navigation">
+                <i class="ri-more-2-fill"></i>
+                <span class="d-none fs-6 pe-1">Browse</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+
+<style>
+    /* Logo Styles */
+    .navbar-logo {
+        height: 50px;
+        width: 80px;
+        transition: all 0.4s ease;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .navbar-logo:hover {
+        transform: scale(1.05);
+    }
+
+    /* Text Styles */
+    .navbar-brand span {
+        color: var(--txt-primary);
+        font-size: 0.8rem;
+        transition: all 0.4s ease 0.2s; /* Text appears after logo */
+        opacity: 1;
+        transform: translateX(0) scale(1.05);
+        display: inline-block;
+    }
+
+    /* Fade-out Effects */
+    .navbar-logo.fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    .navbar-brand span.fade-out {
+        opacity: 0;
+        transform: translateX(-10px) scale(1.05);
+        transition-delay: 0s; /* Remove delay when fading out */
+    }
+
+    /* Fade-in Effects */
+    .navbar-logo.fade-in {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    .navbar-brand span.fade-in {
+        opacity: 0;
+        transform: translateX(10px) scale(1.05);
+    }
+
+    /* Header/Navbar Styles */
+    header.navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+        background-color: var(--navbar-bg);
+        color: var(--navbar-txt);
+        padding: 0.75rem 0;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .body-navbar {
+        padding: 0.75rem 0;
+        background-color: var(--navbar-bg);
+        color: var(--navbar-txt);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .body-gutter {
+        --bs-gutter-x: 3rem;
+    }
+
+    /* Interaction Styles */
+    .btn-close:focus,
+    .btn-close:active,
+    .navbar-toggler:focus,
+    .navbar-toggler:active,
+    .navbar-toggler-icon:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    /* Brand Container */
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .navbar-brand i {
+        font-size: 1.5rem;
+    }
+</style>
