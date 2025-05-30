@@ -2,21 +2,25 @@
 WSGI config for portfolio project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
+Modified for Vercel deployment with WhiteNoise support.
 """
 
 import os
-import sys
-
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise  # Import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
 
-# Define the WSGI application callable
-application = get_wsgi_application()
+# Base Django application
+django_application = get_wsgi_application()
 
-# If you want to use 'app' locally, you can create a reference
-# but keep 'application' as the main callable for Vercel
+# Wrap with WhiteNoise for static files
+application = WhiteNoise(
+    django_application,
+    root=os.path.join(os.path.dirname(__file__), '../staticfiles'),  # Path to collected static
+    prefix='/static/',  # URL prefix
+    max_age=604800  # 1 week cache (optional but recommended)
+)
+
+# Optional: For local development alias
 app = application

@@ -34,15 +34,18 @@ ALLOWED_HOSTS = [
 
 DEBUG = 'False'
 
-# Add these important settings:
+# Static files configuration (updated for Vercel + WhiteNoise)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'portfolioapp/static')]
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolioapp/static'),
+]
 
-
+# WhiteNoise configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'  # Changed from Manifest
+WHITENOISE_KEEP_ONLY_HASHED_FILES = False  # Important for Vercel
+WHITENOISE_USE_FINDERS = True  # Helps with development
+WHITENOISE_MANIFEST_STRICT = False  # More forgiving in production
 
 
 # Application definition
@@ -67,8 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'portfolio.urls'
 
 TEMPLATES = [
