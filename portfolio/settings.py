@@ -27,6 +27,7 @@ DEBUG = True
 
 # settings.py
 ALLOWED_HOSTS = [
+    'jane-li-portfolio.vercel.app',
     '.vercel.app', 
     '127.0.0.1',
     'localhost'
@@ -40,15 +41,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # settings.py
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolioapp', 'static'),
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Application definition
