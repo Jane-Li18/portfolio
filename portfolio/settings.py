@@ -32,18 +32,14 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
-# Add these at the bottom
-DEBUG = False  # Set to True temporarily for debugging if needed
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# Static files configuration
-# Correct STATICFILES_DIRS to point to your app's static folder
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolioapp', 'static'),
-]
-
-# Keep these the same
+# Static files settings
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolioapp/static'),
+]
 
 
 # Media files
@@ -67,6 +63,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'portfolio.urls'
 
 TEMPLATES = [
