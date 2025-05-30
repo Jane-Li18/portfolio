@@ -36,9 +36,15 @@ ALLOWED_HOSTS = [
 DEBUG = False  # Set to True temporarily for debugging if needed
 
 # Static files configuration
+# Correct STATICFILES_DIRS to point to your app's static folder
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'portfolioapp', 'static'),
+]
+
+# Keep these the same
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 # Media files
 MEDIA_URL = '/media/'
