@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-_3!x(mto44=(ac8w#zoyw=sid(-_spcaj1q_v6jj4y0qr5b$q1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jane-li-portfolio.vercel.app', '127.0.0.1']
+# settings.py
+ALLOWED_HOSTS = [
+    '.vercel.app', 
+    '127.0.0.1',
+    'localhost'
+]
+
 
 import os
 from pathlib import Path
@@ -38,7 +44,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'portfolioapp', 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # Production (for collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
 
 MEDIA_URL = '/media/'
