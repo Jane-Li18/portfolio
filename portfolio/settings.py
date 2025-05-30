@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_3!x(mto44=(ac8w#zoyw=sid(-_spcaj1q_v6jj4y0qr5b$q1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jane-li-portfolio.vercel.app', '127.0.0.1']
 
 import os
 from pathlib import Path

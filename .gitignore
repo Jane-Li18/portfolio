@@ -1,3 +1,4 @@
 "/starrvenv" 
 "/__pycache__" 
 "/.vscode" 
+"__pycache__/"           # Add to gitignore
