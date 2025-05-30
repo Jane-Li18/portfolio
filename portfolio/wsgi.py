@@ -17,10 +17,11 @@ django_application = get_wsgi_application()
 # Wrap with WhiteNoise for static files
 application = WhiteNoise(
     django_application,
-    root=os.path.join(os.path.dirname(__file__), '../staticfiles'),  # Path to collected static
-    prefix='/static/',  # URL prefix
-    max_age=604800  # 1 week cache (optional but recommended)
+    root=os.path.join(BASE_DIR, 'staticfiles'),  # Changed to use BASE_DIR
+    prefix='/static/',
+    max_age=604800
 )
+
 
 # Optional: For local development alias
 app = application

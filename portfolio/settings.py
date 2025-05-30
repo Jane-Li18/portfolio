@@ -34,21 +34,19 @@ ALLOWED_HOSTS = [
 
 DEBUG = 'False'
 
-# Static files configuration (updated for Vercel + WhiteNoise)
+# Static files (must be exactly like this)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where collectstatic puts files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolioapp/static'),
+    os.path.join(BASE_DIR, 'portfolioapp/static'),  # Your source static files
 ]
 
-# WhiteNoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'  # Changed from Manifest
-WHITENOISE_KEEP_ONLY_HASHED_FILES = False  # Important for Vercel
-WHITENOISE_USE_FINDERS = True  # Helps with development
-WHITENOISE_MANIFEST_STRICT = False  # More forgiving in production
+# WhiteNoise configuration (update to these exact settings)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+WHITENOISE_ROOT = STATIC_ROOT
+WHITENOISE_ALLOW_ALL_ORIGINS = True  # Important for CDN
+WHITENOISE_INDEX_FILE = True  # Helps with SPA routing if needed
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',

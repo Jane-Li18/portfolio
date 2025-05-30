@@ -5,29 +5,17 @@
       "src": "portfolio/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15mb",
-        "pythonVersion": "3.9"
-      }
-    },
-    {
-      "src": "portfolioapp/static/(.*)",
-      "use": "@vercel/static",
-      "config": {
-        "distDir": "portfolioapp/static"
-      }
-    },
-    {
-      "src": "staticfiles/(.*)",
-      "use": "@vercel/static",
-      "config": {
-        "distDir": "staticfiles"
+        "maxLambdaSize": "15mb"
       }
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/$1"
+      "dest": "/staticfiles/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
