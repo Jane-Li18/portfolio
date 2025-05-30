@@ -1,19 +1,13 @@
-import os
-from django.core.wsgi import get_wsgi_application
 from whitenoise import WhiteNoise
-from pathlib import Path
+from django.core.wsgi import get_wsgi_application
+import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "portfolio.settings")
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
-
+application = get_wsgi_application()
 application = WhiteNoise(
-    get_wsgi_application(),
-    root=str(BASE_DIR / "staticfiles"),
+    application,
+    root=os.path.join(os.path.dirname(__file__), "staticfiles"),
     prefix="/static/",
-    max_age=604800
+    index_file=True
 )
-
-
-# Optional: For local development alias
-app = application
