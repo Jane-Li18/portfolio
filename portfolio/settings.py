@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = 'False'
 
 # Add these important settings:
 STATIC_URL = '/static/'
