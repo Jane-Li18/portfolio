@@ -5,8 +5,12 @@
       "src": "portfolio/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15mb"
+        "maxLambdaSize": "150mb"
       }
+    },
+    {
+      "src": "staticfiles/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
