@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
-DEBUG = 'False'
+DEBUG = 'True'
 
 # Static files (must be exactly like this)
 STATIC_URL = '/static/'
