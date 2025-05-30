@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "portfolio/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "pythonVersion": "3.9"
+      }
+    },
+    {
+      "src": "portfolioapp/static/(.*)",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "portfolioapp/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "portfolio/wsgi.py"
+    }
+  ]
+}
