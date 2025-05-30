@@ -23,29 +23,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_3!x(mto44=(ac8w#zoyw=sid(-_spcaj1q_v6jj4y0qr5b$q1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# settings.py
+import os
+from pathlib import Path
 ALLOWED_HOSTS = [
     'jane-li-portfolio.vercel.app',
-    '.vercel.app', 
+    '.vercel.app',
     '127.0.0.1',
     'localhost'
 ]
 
+# Add these at the bottom
+DEBUG = False  # Set to True temporarily for debugging if needed
 
-import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# settings.py
+# Static files configuration
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 

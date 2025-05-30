@@ -3,13 +3,34 @@
   "builds": [
     {
       "src": "portfolio/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    },
+    {
+      "src": "staticfiles/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/media/$1"
+    },
+    {
+      "src": "/admin(.*)",
       "dest": "portfolio/wsgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "portfolio/wsgi.py",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"]
     }
   ]
 }
