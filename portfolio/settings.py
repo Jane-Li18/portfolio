@@ -46,7 +46,8 @@ STATICFILES_DIRS = [
 ]
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 
 WHITENOISE_MAX_AGE = 0 if DEBUG else 3600
 

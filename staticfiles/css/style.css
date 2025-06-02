@@ -1,4 +1,0 @@
-@font-face {
-    font-family: 'Google Sans';
-    src: url("{% static 'fonts/ProductSans-Regular.ttf' %}") format('truetype');
-}
