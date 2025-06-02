@@ -3,21 +3,29 @@
   "builds": [
     {
       "src": "portfolio/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "150mb",
+        "includeFiles": ["staticfiles/**", "portfolioapp/static/**"]
+      }
     },
     {
-      "src": "public/**",
+      "src": "staticfiles/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/public/$1"
+      "dest": "/staticfiles/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000"
+      }
     },
     {
-      "src": "/(.*)", 
-      "dest": "portfolio/wsgi.py"
+      "src": "/(.*)",
+      "dest": "portfolio/wsgi.py",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"]
     }
   ]
 }
