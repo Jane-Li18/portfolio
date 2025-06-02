@@ -14,6 +14,5 @@ application = WhiteNoise(
     max_age=604800
 )
 
-
 # Optional: For local development alias
 app = application
