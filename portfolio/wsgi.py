@@ -18,16 +18,5 @@ application = WhiteNoise(
     max_age=604800
 )
 
-# Vercel requires either 'app' or 'handler'
+# This is what Vercel looks for
 app = application
-
-# Create a proper handler class for Vercel
-class VercelHandler:
-    def __init__(self, wsgi_app):
-        self.wsgi_app = wsgi_app
-    
-    def __call__(self, environ, start_response):
-        return self.wsgi_app(environ, start_response)
-
-# Ensure the handler is a callable object
-handler = VercelHandler(application)
