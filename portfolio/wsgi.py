@@ -1,20 +1,32 @@
 import os
 from django.core.wsgi import get_wsgi_application
-from whitenoise import WhiteNoise  # Keep using WhiteNoise
+from whitenoise import WhiteNoise
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
 
-# Create the WhiteNoise application
+# Create the WSGI application
+django_app = get_wsgi_application()
+
+# Wrap with WhiteNoise for static files
 application = WhiteNoise(
-    get_wsgi_application(),
+    django_app,
     root=str(BASE_DIR / "staticfiles"),
     prefix="/static/",
     max_age=604800
 )
 
-# Vercel-specific requirements
+# Vercel requires either 'app' or 'handler'
 app = application
-handler = application.__call__  # This satisfies Vercel's handler check
+
+# Create a proper handler class for Vercel
+class VercelHandler:
+    def __init__(self, wsgi_app):
+        self.wsgi_app = wsgi_app
+    
+    def __call__(self, environ, start_response):
+        return self.wsgi_app(environ, start_response)
+
+handler = VercelHandler(application)
