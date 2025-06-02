@@ -1,12 +1,19 @@
 {
   "version": 2,
-  "builds": [{
-    "src": "portfolio/wsgi.py",
-    "use": "@vercel/python",
-    "config": {
-      "includeFiles": ["staticfiles/**", "portfolioapp/static/**"]
+  "builds": [
+    {
+      "src": "portfolio/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "includeFiles": [
+          "staticfiles/**",
+          "portfolioapp/static/**",
+          "portfolioapp/templates/**"
+        ]
+      }
     }
-  }],
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
