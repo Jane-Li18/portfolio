@@ -3,3 +3,4 @@ whitenoise==6.9.0
 psycopg2-binary==2.9.10  # Only if using PostgreSQL
 python-dotenv==1.1.0  # For environment variables
 gunicorn==21.2.0  # WSGI server (optional for Vercel)
+supabase==2.15.1
