@@ -1,15 +1,33 @@
+
 {
   "version": 2,
-  "builds": [{"src": "portfolio/wsgi.py", "use": "@vercel/python"}],
+  "builds": [
+    {
+      "src": "portfolio/wsgi.py",
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb",
+        "includeFiles": ["staticfiles/**"]
+      }
+    }
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/staticfiles/$1",
-      "headers": {"Cache-Control": "public, max-age=31536000"}
+      "dest": "/staticfiles/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "portfolio/wsgi.py"
+      "dest": "portfolio/wsgi.py",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     }
   ]
 }
+
+
+{
+  "scripts": {
+    "build": "python manage.py collectstatic --noinput"
+  }
+}
+
