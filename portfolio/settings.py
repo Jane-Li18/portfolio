@@ -34,18 +34,28 @@ ALLOWED_HOSTS = [
 
 DEBUG = 'True'
 
-# Static files (must be exactly like this)
+# Static files (Vercel-optimized version)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Where collectstatic puts files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Correct for collectstatic
+
+# List ALL directories containing static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolioapp/static'),  # Your source static files
+    os.path.join(BASE_DIR, 'portfolioapp/static'),
+    # Add more if you have other apps with static files
 ]
 
-# WhiteNoise configuration (update to these exact settings)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WhiteNoise production settings (optimized for Vercel)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Changed
 WHITENOISE_ROOT = STATIC_ROOT
-WHITENOISE_ALLOW_ALL_ORIGINS = True  # Important for CDN
-WHITENOISE_INDEX_FILE = True  # Helps with SPA routing if needed
+WHITENOISE_MAX_AGE = 31536000  # 1 year cache (important for performance)
+WHITENOISE_ALLOW_ALL_ORIGINS = True
+WHITENOISE_INDEX_FILE = True
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # Cleanup old files automatically
+
+# Add this if you have user-uploaded media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 INSTALLED_APPS = [
