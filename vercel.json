@@ -5,7 +5,9 @@
       "src": "portfolio/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15mb"
+        "maxLambdaSize": "15mb",
+        "installCommand": "pip install -r requirements.txt",
+        "buildCommand": "python manage.py collectstatic --noinput"
       }
     },
     {
@@ -22,13 +24,5 @@
       "src": "/(.*)",
       "dest": "portfolio/wsgi.py"
     }
-  ],
-  "build": {
-    "env": {
-      "DJANGO_SETTINGS_MODULE": "portfolio.settings"
-    },
-    "commands": [
-      "python manage.py collectstatic --noinput"
-    ]
-  }
+  ]
 }
