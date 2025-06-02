@@ -4,3 +4,4 @@
 "__pycache__/"           # Add to gitignore
 "31b2c645af7f23f3a40c0384db6f68b8fd220ff1" 
 .vercel
+"staticfiles/" 
