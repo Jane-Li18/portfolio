@@ -6,7 +6,12 @@
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "150mb",
-        "includeFiles": ["staticfiles/**", "portfolioapp/static/**"]
+        "includeFiles": [
+          "staticfiles/**",
+          "portfolioapp/static/**",
+          "portfolio/settings.py",
+          "manage.py"
+        ]
       }
     },
     {
@@ -23,7 +28,7 @@
       }
     },
     {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "vercel_handler.py"
     }
   ]
