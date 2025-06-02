@@ -37,31 +37,15 @@ logging.getLogger('django.contrib.staticfiles').setLevel(logging.ERROR)
 DEBUG = 'True'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Must match collectstatic output
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Normalize all static paths to lowercase
 STATICFILES_DIRS = [
-    os.path.normcase(os.path.join(BASE_DIR, 'portfolioapp/static')),
+    os.path.join(BASE_DIR, 'portfolioapp/static'),
 ]
 
 # Disable Whitenoise caching for development
 WHITENOISE_MAX_AGE = 0 if DEBUG else 3600
 
-# Add path normalization to static finders
-from django.contrib.staticfiles.finders import AppDirectoriesFinder
-
-class NormalizedAppDirectoriesFinder(AppDirectoriesFinder):
-    def find(self, path, all=False):
-        matches = super().find(path, all)
-        if matches:
-            if not all:
-                return os.path.normcase(matches)
-            return [os.path.normcase(match) for match in matches]
-        return matches
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
 
 
 # Media files
