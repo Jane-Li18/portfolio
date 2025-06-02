@@ -40,8 +40,11 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolioapp/static'),
+    os.path.join(BASE_DIR, 'portfolioapp/static/assets'),
+    os.path.join(BASE_DIR, 'portfolioapp/static/css'),
+    os.path.join(BASE_DIR, 'portfolioapp/static/fonts'),
 ]
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
