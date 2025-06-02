@@ -22,37 +22,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-_3!x(mto44=(ac8w#zoyw=sid(-_spcaj1q_v6jj4y0qr5b$q1'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 import os
 from pathlib import Path
+import logging
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 ALLOWED_HOSTS = [
     'jane-li-portfolio.vercel.app',
     '.vercel.app',
     '127.0.0.1',
     'localhost'
 ]
-import logging
-logging.getLogger('django.contrib.staticfiles').setLevel(logging.ERROR)
 
-DEBUG = 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Normalize all static paths to lowercase
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'portfolioapp/static'),
 ]
 
-# Disable Whitenoise caching for development
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 WHITENOISE_MAX_AGE = 0 if DEBUG else 3600
 
-
-
-# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,7 +71,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+logging.getLogger('django.contrib.staticfiles').setLevel(logging.ERROR)
+
 
 
 ROOT_URLCONF = 'portfolio.urls'
