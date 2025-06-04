@@ -11,8 +11,8 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "staticfiles/$1"
+      "src": "/(.*)",
+      "dest": "portfolio/wsgi.py"
     }
   ]
 }
