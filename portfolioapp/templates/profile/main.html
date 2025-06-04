@@ -260,10 +260,10 @@
         // Wait for fade-out to complete before changing sources
         setTimeout(() => {
             if (theme === 'dark') {
-                logo.src = "{% static 'assets/logo_white.png' %}";
+                logo.src = "https://bcscqnqdpobplcbczotx.supabase.co/storage/v1/object/sign/portfolio-assets/logo_white.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hNzFhOWNmYy1mYTc3LTRjOWEtYTNkNy1hMTY3ZGJmZTVmNjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwb3J0Zm9saW8tYXNzZXRzL2xvZ29fd2hpdGUucG5nIiwiaWF0IjoxNzQ5MDMzOTgyLCJleHAiOjMxNTUzMTc0OTc5ODJ9.S3wmSmfMgMryHhvtdnuEYy3kK7iE_7tnRBxK8c4bJ4A";
                 themeToggle.innerHTML = '<i class="ri-sun-line"></i>';
             } else {
-                logo.src = "{% static 'assets/logo_black.png' %}";
+                logo.src = "https://bcscqnqdpobplcbczotx.supabase.co/storage/v1/object/sign/portfolio-assets/logo_black.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hNzFhOWNmYy1mYTc3LTRjOWEtYTNkNy1hMTY3ZGJmZTVmNjgiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJwb3J0Zm9saW8tYXNzZXRzL2xvZ29fYmxhY2sucG5nIiwiaWF0IjoxNzQ5MDMzOTQ1LCJleHAiOjMxNTUzMTc0OTc5NDV9.0e7LjAzy79dMxTPBPTe9H9Og83bJFNedCBWJ1l6D66c";
                 themeToggle.innerHTML = '<i class="ri-moon-line"></i>';
             }
             
