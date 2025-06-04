@@ -173,20 +173,20 @@
         
         /* Minimal scrollbar for the body */
         body::-webkit-scrollbar {
-            width: 8px; /* Width of the scrollbar */
+            width: 1px; /* Width of the scrollbar */
         }
         
         body::-webkit-scrollbar-track {
-            background: transparent; /* Transparent track */
+            background: var(--bg-primary);
         }
         
         body::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent thumb */
+            background-color: var(--txt-primary);
             border-radius: 4px; /* Rounded corners */
         }
         
         body::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(0, 0, 0, 0.5); /* Darker thumb on hover */
+            background-color: color-mix(in srgb, var(--txt-primary) 80%, transparent);
         }
         
         /* Optional: Minimal scrollbar for other scrollable elements */
